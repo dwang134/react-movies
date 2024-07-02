@@ -1,7 +1,7 @@
 import Image from "next/image";
 // import {fetchMovies} from '../../api/API';
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import { useEffect, useState } from "react";
 
 export default async function Home() {
@@ -26,15 +26,22 @@ export default async function Home() {
     options
   );
 
+  const mostDemandMoviesRes = await fetch ('https://api.themoviedb.org/3/trending/movie/day?language=en-US', options);
+  const featuerdMovieRes = await fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', options);
+  const featuerdTVRes= await fetch ('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options);
+
   const movies = await movieRes.json();
   const tvShows = await tvRes.json();
+  const demandMovies = await mostDemandMoviesRes.json();
+  const featuredMovie = await featuerdMovieRes.json();
+  const featuredTV = await featuerdTVRes.json();
 
-  fetch('https://api.themoviedb.org/3/movie/987685/images', options)
-  .then(response => response.json())
-  .then(response => console.log(response))
-  .catch(err => console.error(err));
+  // fetch('https://api.themoviedb.org/3/movie/987685/images', options)
+  // .then(response => response.json())
+  // .then(response => console.log(response))
+  // .catch(err => console.error(err));
 
-  // console.log(movies);
+  console.log();
 
   // const movieRes = await fetch(
   //   "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=2",
@@ -52,12 +59,17 @@ export default async function Home() {
   // fetchMovies().then(movies => console.log(movies)).catch(err => console.log(err));
 
   return (
-    <div className="homeContainer w-screen h-screen border-4 border-sky-500">
-      <Header />
+    <div className="homeContainer w-screen">
+    <Header/>
+
+      {/* <div className='bg-red-300 w-full min-h-10'>
+        Testnig
+      </div> */}
 
       {/* Hero Section */}
-      <div className="heroSection">
+      <div className="heroSection w-auto h-screen bg-red-400">
         <h2>Hero Section (Slideshow/Banners)</h2>
+        {}
         {/* Implement your slideshow or banners for top movies and TV shows */}
       </div>
 
@@ -71,14 +83,14 @@ export default async function Home() {
               className="movieCard bg-white p-4 rounded-lg shadow-md"
             >
               <Image
-                src={`https://api.themoviedb.org/3/movie/${movie.id}/images?=&api_key=e6360fc95db4155cb35d91a74ee18334`}
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt={movie.title}
                 width={500}
                 height={750}
                 className="rounded-lg"
               />
               <h3 className="text-lg font-bold mt-2">{movie.title}</h3>
-              <p className="text-gray-600">{movie.overview}</p>
+              <p className="text-gray-600 line-clamp-3">{movie.overview}</p>
               <p className="text-gray-500 mt-2">
                 Released: {movie.release_date}
               </p>
@@ -91,13 +103,13 @@ export default async function Home() {
       <div className="featuredTvShowsSection">
         <h2>Featured TV Shows</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {Object.values(tvShows).map((show: any) => (
+        {tvShows.results.map((show: any) => (
             <div
               key={show.id}
               className="tvShowCard bg-white p-4 rounded-lg shadow-md"
             >
               <Image
-                src={`https://api.themoviedb.org/3/tv/${show.id}/images&api_key=e6360fc95db4155cb35d91a74ee18334`}
+                src={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
                 alt={show.name}
                 width={500}
                 height={750}
