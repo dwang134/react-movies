@@ -4,6 +4,8 @@ import Footer from "../components/Footer";
 import HeroSection from "@/components/HeroSection";
 import FeaturedMovies from "@/components/FeaturedMovies";
 import FeaturedTV from "@/components/FeaturedTV";
+import Image from 'next/image';
+import AllTrending from "@/components/AllTrending";
 
 
 export default async function Home() {
@@ -32,11 +34,14 @@ export default async function Home() {
   );
 
   const trendingPeopleRes = await fetch('https://api.themoviedb.org/3/trending/person/week?language=en-US', options);
+  const allTrendingRes = await fetch('https://api.themoviedb.org/3/trending/all/day?language=en-US', options);
 
   const demandMovies = await mostDemandMoviesRes.json();
   const movies = await movieRes.json();
   const tvShows = await tvRes.json();
   const trendingPeople = await trendingPeopleRes.json();
+  const allTrendingStuff = await allTrendingRes.json();
+  console.log(allTrendingStuff.results);
 
 
   // fetch('https://api.themoviedb.org/3/movie/987685/images', options)
@@ -73,14 +78,24 @@ export default async function Home() {
 
       {/* Content Sections */}
       <div className="contentSections">
-        <section>
-          <h2>Content Section 1</h2>
-          <p>Static content about Hollywood or services.</p>
-        </section>
-        <section>
-          <h2>Content Section 2</h2>
-          <p>More static content or exciting details.</p>
-        </section>
+      <div className="text-white py-8 px-12">
+      <h2 className="text-2xl font-bold mb-4">Actors Spotlight</h2>
+      <div className="flex overflow-x-auto space-x-6">
+        {trendingPeople.results.map((person: any) => (
+          <div key={person.id} className="flex-shrink-0 w-44">
+            <Image
+              src={`https://image.tmdb.org/t/p/w500${person.profile_path}`}
+              alt={person.name}
+              width={176}  // These dimensions are examples
+              height={264}
+              className="rounded-lg"
+            />
+            <h3 className="text-lg font-semibold mt-2">{person.name}</h3>
+          </div>
+        ))}
+      </div>
+    </div>
+        <AllTrending allTrendingStuff={allTrendingStuff}/>
       </div>
 
       <Footer />
