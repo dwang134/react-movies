@@ -15,7 +15,7 @@ const FeaturedMovies: React.FC<FeaturedMovieProps> = ({ movies }) => {
     return (
         <div className="featuredMoviesSection w-full py-10">
             <div className="container mx-auto px-4">
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-8">Featured Movies</h2>
+                <h2 className="text-lg md:text-xl lg:text-3xl font-bold text-center text-white mb-8">Featured Movies</h2>
                 <Swiper
                     slidesPerView={1}
                     spaceBetween={10}
@@ -31,19 +31,17 @@ const FeaturedMovies: React.FC<FeaturedMovieProps> = ({ movies }) => {
                 >
                     {movies.results.slice(0, 20).map((movie: any) => (
                         <SwiperSlide key={movie.id}>
-                            <div className="movieCard bg-white p-4 rounded-lg shadow-md">
+                            <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
                                 <Image
                                     src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                                     alt={movie.title}
                                     width={500}
                                     height={750}
-                                    className="rounded-lg"
+                                    className="w-full h-auto rounded-lg mb-4"
                                 />
-                                <h3 className="text-lg font-bold mt-2">{movie.title}</h3>
-                                <p className="text-gray-600 line-clamp-3">{movie.overview}</p>
-                                <p className="text-gray-500 mt-2">
-                                    Released: {movie.release_date}
-                                </p>
+                                <h3 className="text-lg font-bold text-white mb-2">{movie.title}</h3>
+                                <p className="text-gray-400 text-sm line-clamp-3">{movie.overview}</p>
+                                <p className="text-gray-500 text-sm mt-2">Released: {movie.release_date}</p>
                             </div>
                         </SwiperSlide>
                     ))}
