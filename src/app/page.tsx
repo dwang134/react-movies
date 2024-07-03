@@ -1,8 +1,9 @@
-import Image from "next/image";
 // import {fetchMovies} from '../../api/API';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { useEffect, useState } from "react";
+import HeroSection from "@/components/HeroSection";
+import Image from "next/image";
+
 
 export default async function Home() {
   const options = {
@@ -14,8 +15,6 @@ export default async function Home() {
     },
   };
 
-  
-
   const movieRes = await fetch(
     "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=2",
     options
@@ -26,9 +25,18 @@ export default async function Home() {
     options
   );
 
-  const mostDemandMoviesRes = await fetch ('https://api.themoviedb.org/3/trending/movie/day?language=en-US', options);
-  const featuerdMovieRes = await fetch('https://api.themoviedb.org/3/tv/popular?language=en-US&page=1', options);
-  const featuerdTVRes= await fetch ('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options);
+  const mostDemandMoviesRes = await fetch(
+    "https://api.themoviedb.org/3/trending/movie/day?language=en-US",
+    options
+  );
+  const featuerdMovieRes = await fetch(
+    "https://api.themoviedb.org/3/tv/popular?language=en-US&page=1",
+    options
+  );
+  const featuerdTVRes = await fetch(
+    "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
+    options
+  );
 
   const movies = await movieRes.json();
   const tvShows = await tvRes.json();
@@ -41,7 +49,7 @@ export default async function Home() {
   // .then(response => console.log(response))
   // .catch(err => console.error(err));
 
-  console.log();
+  // console.log(demandMovies.results);
 
   // const movieRes = await fetch(
   //   "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=2",
@@ -53,28 +61,19 @@ export default async function Home() {
   //   options
   // );
 
-  // const movieData = await movieRes.json();
+  // const movieData = await movieRes.json();`
   // const tvData = await tvRes.json();
 
   // fetchMovies().then(movies => console.log(movies)).catch(err => console.log(err));
 
+
+
   return (
     <div className="homeContainer w-screen">
-    <Header/>
-
-      {/* <div className='bg-red-300 w-full min-h-10'>
-        Testnig
-      </div> */}
-
-      {/* Hero Section */}
-      <div className="heroSection w-auto h-screen bg-red-400">
-        <h2>Hero Section (Slideshow/Banners)</h2>
-        {}
-        {/* Implement your slideshow or banners for top movies and TV shows */}
-      </div>
-
-      {/* Featured Movies Section */}
-      <div className="featuredMoviesSection">
+      <Header />
+      <HeroSection demandMovies={demandMovies}/>
+    {/* Featured Movies Section */}
+    <div className="featuredMoviesSection">
         <h2>Featured Movies</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {movies.results.map((movie: any) => (
@@ -99,11 +98,12 @@ export default async function Home() {
         </div>
       </div>
 
+
       {/* Featured TV Shows Section */}
       <div className="featuredTvShowsSection">
         <h2>Featured TV Shows</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {tvShows.results.map((show: any) => (
+          {tvShows.results.map((show: any) => (
             <div
               key={show.id}
               className="tvShowCard bg-white p-4 rounded-lg shadow-md"
