@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar';
 import React from 'react';
 import Image from 'next/image';
+import Footer from '@/components/Footer';
 
 interface Movie {
   id: number;
@@ -47,6 +48,7 @@ const MovieList: React.FC = async () => {
           ))}
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };
