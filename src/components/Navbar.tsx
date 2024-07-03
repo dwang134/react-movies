@@ -38,7 +38,7 @@ const Navbar: React.FC = () => {
             Register
           </a>
           <a
-            href="#"
+            href="/login"
             className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
           >
             Login
