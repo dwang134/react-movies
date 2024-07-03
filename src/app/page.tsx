@@ -2,7 +2,8 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import HeroSection from "@/components/HeroSection";
-import Image from "next/image";
+import FeaturedMovies from "@/components/FeaturedMovies";
+import FeaturedTV from "@/components/FeaturedTV";
 
 
 export default async function Home() {
@@ -29,20 +30,14 @@ export default async function Home() {
     "https://api.themoviedb.org/3/trending/movie/day?language=en-US",
     options
   );
-  const featuerdMovieRes = await fetch(
-    "https://api.themoviedb.org/3/tv/popular?language=en-US&page=1",
-    options
-  );
-  const featuerdTVRes = await fetch(
-    "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
-    options
-  );
 
+  const trendingPeopleRes = await fetch('https://api.themoviedb.org/3/trending/person/week?language=en-US', options);
+
+  const demandMovies = await mostDemandMoviesRes.json();
   const movies = await movieRes.json();
   const tvShows = await tvRes.json();
-  const demandMovies = await mostDemandMoviesRes.json();
-  const featuredMovie = await featuerdMovieRes.json();
-  const featuredTV = await featuerdTVRes.json();
+  const trendingPeople = await trendingPeopleRes.json();
+
 
   // fetch('https://api.themoviedb.org/3/movie/987685/images', options)
   // .then(response => response.json())
@@ -73,57 +68,8 @@ export default async function Home() {
       <Header />
       <HeroSection demandMovies={demandMovies}/>
     {/* Featured Movies Section */}
-    <div className="featuredMoviesSection">
-        <h2>Featured Movies</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {movies.results.map((movie: any) => (
-            <div
-              key={movie.id}
-              className="movieCard bg-white p-4 rounded-lg shadow-md"
-            >
-              <Image
-                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={movie.title}
-                width={500}
-                height={750}
-                className="rounded-lg"
-              />
-              <h3 className="text-lg font-bold mt-2">{movie.title}</h3>
-              <p className="text-gray-600 line-clamp-3">{movie.overview}</p>
-              <p className="text-gray-500 mt-2">
-                Released: {movie.release_date}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-
-      {/* Featured TV Shows Section */}
-      <div className="featuredTvShowsSection">
-        <h2>Featured TV Shows</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {tvShows.results.map((show: any) => (
-            <div
-              key={show.id}
-              className="tvShowCard bg-white p-4 rounded-lg shadow-md"
-            >
-              <Image
-                src={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
-                alt={show.name}
-                width={500}
-                height={750}
-                className="rounded-lg"
-              />
-              <h3 className="text-lg font-bold mt-2">{show.name}</h3>
-              <p className="text-gray-600">{show.overview}</p>
-              <p className="text-gray-500 mt-2">
-                First Air Date: {show.first_air_date}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+      <FeaturedMovies movies={movies}/>
+      <FeaturedTV tvShows={tvShows}/>      
 
       {/* Content Sections */}
       <div className="contentSections">
