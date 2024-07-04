@@ -12,9 +12,9 @@ interface HeroSectionProps {
 
 const HeroSection: React.FC<HeroSectionProps> = ({ demandMovies }) => {
     return (
-        <div className="heroSection w-full h-auto p-10">
+        <div className="heroSection w-full h-auto p-10 bg-gray-900"  >
             <div className="container mx-auto px-4">
-                <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-center mb-8">Most demanded Movies</h2>
+                <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-center mb-8 text-white">Most demanded Movies</h2>
                 <Swiper
                     pagination={{ clickable: true }}
                     autoplay={{ delay: 5000 }}

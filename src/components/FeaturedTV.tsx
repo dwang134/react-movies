@@ -13,7 +13,7 @@ interface FeaturedTVProps {
 
 const FeaturedTV: React.FC<FeaturedTVProps> = ({ tvShows }) => {
     return (
-        <div className="featuredTvShowsSection w-full py-10">
+        <div className="featuredTvShowsSection w-full py-10 bg-gray-900">
             <div className="container mx-auto px-4">
                 <h2 className="text-lg md:text-xl lg:text-3xl font-bold text-center text-white mb-8">Featured TV Shows</h2>
                 <Swiper

@@ -77,7 +77,7 @@ export default async function Home() {
       <FeaturedTV tvShows={tvShows}/>      
 
       {/* Content Sections */}
-      <div className="contentSections">
+      <div className="contentSections bg-gray-900">
       <div className="text-white py-8 px-12">
       <h2 className="text-2xl font-bold mb-4">Actors Spotlight</h2>
       <div className="flex overflow-x-auto space-x-6">

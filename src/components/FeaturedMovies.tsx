@@ -13,7 +13,7 @@ interface FeaturedMovieProps {
 
 const FeaturedMovies: React.FC<FeaturedMovieProps> = ({ movies }) => {
     return (
-        <div className="featuredMoviesSection w-full py-10">
+        <div className="featuredMoviesSection w-full py-10 bg-gray-900">
             <div className="container mx-auto px-4">
                 <h2 className="text-lg md:text-xl lg:text-3xl font-bold text-center text-white mb-8">Featured Movies</h2>
                 <Swiper
