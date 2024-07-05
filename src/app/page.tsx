@@ -67,7 +67,6 @@ export default async function Home() {
   // fetchMovies().then(movies => console.log(movies)).catch(err => console.log(err));
 
 
-
   return (
     <div className="homeContainer w-screen">
       <Header />
