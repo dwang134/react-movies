@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface Movie {
   id: number;
@@ -20,9 +21,9 @@ const fetchMovies = async (): Promise<Movie[]> => {
     }
   };
 
-  const response = await fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options);
+  const response = await fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', options);
   const data = await response.json();
-  return data.results.slice(0, 12); // Limit to 12 movies
+  return data.results.slice(0, 18); // Limit to 12 movies
 };
 
 const MovieList = async () => {
@@ -41,6 +42,7 @@ const MovieList = async () => {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
           {movies.map((movie) => (
             <div key={movie.id} className="bg-gray-800 p-4 rounded-lg shadow-lg">
+              <Link href={`/movies/recent/${movie.id}`}>
               <Image
                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt={movie.title}
@@ -48,6 +50,7 @@ const MovieList = async () => {
                 height="300"
                 className="w-full h-auto rounded-lg mb-4"
               />
+              </Link>
               <h3 className="text-lg font-bold text-white mb-2">{movie.title}</h3>
               <p className="text-gray-400 text-sm line-clamp-3">{movie.overview}</p>
               <p className="text-gray-500 text-sm mt-2">Released: {movie.release_date}</p>
