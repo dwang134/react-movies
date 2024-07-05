@@ -26,7 +26,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ demandMovies }) => {
                             <Image
                                 src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
                                 alt={movie.title}
-                                layout="fill"
+                                width="500"
+                                height="300"
                                 className="object-cover w-full h-full opacity-70"
                             />
                             <div className="absolute inset-0 flex flex-col justify-center items-center text-white bg-black bg-opacity-50">

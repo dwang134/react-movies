@@ -38,7 +38,7 @@ const MovieList = async () => {
           <a href="/movies/upcoming" className="text-white px-4 py-2 border border-gray-500 rounded-md mx-2 bg-gray-800 hover:bg-gray-600 transition duration-300">Release Date</a>
           <a href="/movies/recent" className="text-white px-4 py-2 border border-blue-500 rounded-md mx-2 bg-blue-500 hover:bg-blue-700 transition duration-300">Recently Added</a>
         </div>
-        <h2 className="text-3xl font-bold mb-6 text-center text-white">Popular Movies</h2>
+        <h2 className="text-3xl font-bold mb-6 text-center text-white">Now Playing</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
           {movies.map((movie) => (
             <div key={movie.id} className="bg-gray-800 p-4 rounded-lg shadow-lg">

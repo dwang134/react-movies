@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
             Movies
           </a>
           <a
-            href="/tv"
+            href="/tv/popular"
             className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
           >
             TV
