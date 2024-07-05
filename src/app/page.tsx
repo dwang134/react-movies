@@ -19,7 +19,7 @@ export default async function Home() {
   };
 
   const movieRes = await fetch(
-    "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=2",
+    "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
     options
   );
 
