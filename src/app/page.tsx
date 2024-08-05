@@ -41,7 +41,7 @@ export default async function Home() {
   const tvShows = await tvRes.json();
   const trendingPeople = await trendingPeopleRes.json();
   const allTrendingStuff = await allTrendingRes.json();
-  // console.log("ALL trending: ", JSON.stringify(allTrendingStuff.results));
+  // console.log("trending people: ", JSON.stringify(trendingPeople.results));
 
 
   // fetch('https://api.themoviedb.org/3/movie/987685/images', options)
