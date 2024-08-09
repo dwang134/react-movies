@@ -24,6 +24,7 @@ const fetchMovies = async (): Promise<Movie[]> => {
 
   const response = await fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options);
   const data = await response.json();
+  // console.log("POPULAR MOVIES: ", JSON.stringify(data.results));
   return data.results.slice(0, 18); // Limit to 12 movies
   // Movies
   // “Most watched” —> Popular 

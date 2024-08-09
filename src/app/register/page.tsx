@@ -18,7 +18,7 @@ const Register: React.FC = () => {
     const password = passwordRef.current?.value;
 
     if (firstName && lastName && email && password) {
-        const response = await fetch('http://localhost:8080/api/users/register', {
+        const response = await fetch('https://react-movies-backend-knbt.onrender.com/api/users/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

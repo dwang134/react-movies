@@ -29,7 +29,7 @@ const AllTrending: React.FC<AllTrendingProps> = ({ allTrendingStuff }) => {
           modules={[Pagination, Navigation]}
           className="mySwiper"
         >
-          {allTrendingStuff.results.slice(0, 20).map((item: any) => (
+          {allTrendingStuff.slice(0, 20).map((item: any) => (
             <SwiperSlide key={item.id}>
               <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
                 {item.media_type === 'person' ? (

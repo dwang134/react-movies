@@ -14,13 +14,13 @@ const Navbar: React.FC = () => {
           </a>
           <a
             href="/movies/popular"
-            className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+            className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-md font-medium"
           >
             Movies
           </a>
           <a
             href="/tv/popular"
-            className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+            className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-md font-medium"
           >
             TV
           </a>
@@ -33,13 +33,13 @@ const Navbar: React.FC = () => {
         <div className="flex items-center space-x-4">
           <a
             href="/register"
-            className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+            className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-md font-medium"
           >
             Register
           </a>
           <a
             href="/login"
-            className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+            className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-md font-medium"
           >
             Login
           </a>

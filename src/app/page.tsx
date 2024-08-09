@@ -19,29 +19,27 @@ export default async function Home() {
   };
 
   const movieRes = await fetch(
-    "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1",
-    options
+    "https://react-movies-backend-knbt.onrender.com/api/movie/now_playing"
   );
 
   const tvRes = await fetch(
-    "https://api.themoviedb.org/3/tv/airing_today?language=en-US&page=1",
-    options
+    "https://react-movies-backend-knbt.onrender.com/api/tv/airing_today"
   );
 
   const mostDemandMoviesRes = await fetch(
-    "https://api.themoviedb.org/3/trending/movie/day?language=en-US",
-    options
+    "https://react-movies-backend-knbt.onrender.com/api/trending/all"
   );
 
-  const trendingPeopleRes = await fetch('https://api.themoviedb.org/3/trending/person/week?language=en-US', options);
-  const allTrendingRes = await fetch('https://api.themoviedb.org/3/trending/all/day?language=en-US', options);
+  const trendingPeopleRes = await fetch('https://react-movies-backend-knbt.onrender.com/api/trending/person');
+  const allTrendingRes = await fetch('https://react-movies-backend-knbt.onrender.com/api/trending/all');
 
   const demandMovies = await mostDemandMoviesRes.json();
   const movies = await movieRes.json();
   const tvShows = await tvRes.json();
   const trendingPeople = await trendingPeopleRes.json();
   const allTrendingStuff = await allTrendingRes.json();
-  // console.log("trending people: ", JSON.stringify(trendingPeople.results));
+  console.log("tv LENGTH: ", tvShows.length);
+  // console.log("trending stuff: ", JSON.stringify(allTrendingStuff));
 
 
   // fetch('https://api.themoviedb.org/3/movie/987685/images', options)
@@ -69,18 +67,18 @@ export default async function Home() {
 
   return (
     <div className="homeContainer w-screen">
-      <Header />
+      <Header media={movies.concat(tvShows)}/>
       <HeroSection demandMovies={demandMovies}/>
     {/* Featured Movies Section */}
       <FeaturedMovies movies={movies}/>
-      <FeaturedTV tvShows={tvShows}/>      
+      <FeaturedTV tvShows={tvShows}/>
 
       {/* Content Sections */}
       <div className="contentSections bg-gray-900">
       <div className="text-white py-8 px-12">
       <h2 className="text-2xl font-bold mb-4">Actors Spotlight</h2>
       <div className="flex overflow-x-auto space-x-6">
-        {trendingPeople.results.map((person: any) => (
+        {trendingPeople.map((person: any) => (
           <div key={person.id} className="flex-shrink-0 w-44">
             <Image
               src={`https://image.tmdb.org/t/p/w500${person.profile_path}`}
