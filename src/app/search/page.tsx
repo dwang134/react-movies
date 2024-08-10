@@ -30,7 +30,7 @@ const SearchResults: React.FC = () => {
         if (query) {
           const lowerCaseQuery = query.toLowerCase();
 
-          const results = media.filter((item:any) => {
+          const results = media.filter((item: any) => {
             if (item.title) {
               return item.title.toLowerCase().includes(lowerCaseQuery);
             } else if (item.name) {
@@ -88,7 +88,7 @@ const SearchResults: React.FC = () => {
           <div className="flex flex-col space-y-6">
             {filteredResults.map((item, index) => (
               <div 
-                key={index} 
+                key={item.id || index} // Ensure unique key
                 className="flex items-start bg-gray-800 p-4 rounded-lg shadow-lg cursor-pointer"
                 onClick={() => handleRowClick(item)}
               >
