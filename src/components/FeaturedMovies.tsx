@@ -29,7 +29,7 @@ const FeaturedMovies: React.FC<FeaturedMovieProps> = ({ movies }) => {
                     modules={[Pagination, Navigation]}
                     className="mySwiper"
                 >
-                    {movies.results.slice(0, 20).map((movie: any) => (
+                    {movies.slice(0, 20).map((movie: any) => (
                         <SwiperSlide key={movie.id}>
                             <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
                                 <Image

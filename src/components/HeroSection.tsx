@@ -21,7 +21,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ demandMovies }) => {
                     modules={[Pagination, Autoplay]}
                     className="h-80 md:h-96 lg:h-[600px]"
                 >
-                    {demandMovies.results.map((movie: any) => (
+                    {demandMovies.map((movie: any) => (
                         <SwiperSlide key={movie.id} className="relative">
                             <Image
                                 src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}

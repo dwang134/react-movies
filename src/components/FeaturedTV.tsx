@@ -29,7 +29,7 @@ const FeaturedTV: React.FC<FeaturedTVProps> = ({ tvShows }) => {
                     modules={[Pagination, Navigation]}
                     className="mySwiper"
                 >
-                    {tvShows.results.slice(0, 20).map((show: any) => (
+                    {tvShows.slice(0, 20).map((show: any) => (
                         <SwiperSlide key={show.id}>
                             <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
                                 <Image

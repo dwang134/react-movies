@@ -29,7 +29,7 @@ const fetchMovieDetails = async (id: number): Promise<Movie> => {
     }
   };
 
-  const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options);
+  const response = await fetch(`https://react-movies-backend-knbt.onrender.com/api/movie/now_playing/${id}`);
   const data = await response.json();
   return data;
 };

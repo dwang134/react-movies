@@ -1,7 +1,6 @@
 "use client";
 import Navbar from '@/components/Navbar';
-import React, { useRef, FormEvent } from 'react';
- // Ensure Navbar is imported
+import React, { useRef, FormEvent, useState } from 'react';
 
 const Register: React.FC = () => {
   const firstNameRef = useRef<HTMLInputElement>(null);
@@ -9,18 +8,48 @@ const Register: React.FC = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (e: FormEvent) => {
+  const [toast, setToast] = useState<{ message: string, type: 'success' | 'error' } | null>(null);
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const firstName = firstNameRef.current?.value;
     const lastName = lastNameRef.current?.value;
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
-    console.log('User Info:', { firstName, lastName, email, password });
+
+    if (firstName && lastName && email && password) {
+        const response = await fetch('https://react-movies-backend-knbt.onrender.com/api/users/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ firstName, lastName, email, password }),
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Registration successful:', data);
+            firstNameRef.current.value = "";
+            lastNameRef.current.value = "";
+            emailRef.current.value = "";
+            passwordRef.current.value = "";
+            setToast({ message: 'Registration successful!', type: 'success' });
+        } else {
+            const error = await response.text();
+            console.error('Registration failed:', error);
+            setToast({ message: 'Registration failed. Please try again.', type: 'error' });
+        }
+    } else {
+        setToast({ message: 'All fields are required.', type: 'error' });
+    }
+
+    // Hide the toast after 3 seconds
+    setTimeout(() => setToast(null), 3000);
   };
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />  {/* Navbar at the top */}
+      <Navbar /> {/* Navbar at the top */}
       <div className="flex-grow flex items-center justify-center bg-gray-900"> {/* Dark background */}
         <div className="bg-gray-800 p-10 rounded-lg shadow-lg w-full max-w-md">
           <h2 className="text-3xl font-bold mb-6 text-center text-white">Create a New Account</h2>
@@ -82,6 +111,12 @@ const Register: React.FC = () => {
           </form>
         </div>
       </div>
+
+      {toast && (
+        <div className={`fixed bottom-4 left-1/2 transform -translate-x-1/2 p-4 rounded-lg shadow-lg ${toast.type === 'success' ? 'bg-green-500' : 'bg-red-500'} text-white`}>
+          {toast.message}
+        </div>
+      )}
     </div>
   );
 }
