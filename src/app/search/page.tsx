@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams, useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Image from "next/image";
 
@@ -63,6 +63,7 @@ const SearchResults: React.FC = () => {
   };
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <div className="min-h-screen bg-gray-900 text-white">
       <Navbar />
       <div className="p-8">
@@ -113,6 +114,7 @@ const SearchResults: React.FC = () => {
         )}
       </div>
     </div>
+    </Suspense>
   );
 };
 
