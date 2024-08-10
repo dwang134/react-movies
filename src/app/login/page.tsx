@@ -19,7 +19,7 @@ const Login: React.FC = () => {
     }
   
     try {
-      const response = await fetch('http://localhost:8080/api/users/authenticate', {
+      const response = await fetch('https://react-movies-backend-knbt.onrender.com/api/users/authenticate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
